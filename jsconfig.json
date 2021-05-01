@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+      "target": "ES6",
+      "allowSyntheticDefaultImports": true,
+      "baseUrl": ".",
+      "moduleResolution": "node",
+      "paths": {      
+        "@common/*": ["src/common/*"],
+        "@components/*": ["src/components/*"],
+        "@data/*": ["src/data/*"],
+        "@img/*": ["src/img/*"],
+        "@nav/*": ["src/nav/*"],
+        "@pages/*": ["src/pages/*"],
+        "@css/*": ["src/css/*"],
+        "/": ["."]
+      }
+    }
+  }
+  
