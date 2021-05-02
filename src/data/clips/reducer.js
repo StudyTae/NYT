@@ -28,7 +28,9 @@ export const clips = (state = initialState, action) => {
         if (draft.recentTexts.length >= 5) {
           draft.recentTexts.splice(0, 1);
         }
-        draft.recentTexts = draft.recentTexts.concat(action.data);
+        if (action.data && !draft.recentTexts.includes(action.data)) {
+          draft.recentTexts = draft.recentTexts.concat(action.data);
+        }
       });
     case ActionTypes.CLEAR_RECENTS:
       return produce(state, (draft) => {
