@@ -8,6 +8,7 @@ import * as ActionTypes from './actionTypes';
 const initialState = {
   clipList: [],
   recentTexts: [],
+  searchCurrentText: '',
 };
 
 export const clips = (state = initialState, action) => {
@@ -24,11 +25,18 @@ export const clips = (state = initialState, action) => {
       });
     case ActionTypes.SET_RECENTS:
       return produce(state, (draft) => {
-        draft.recentTexts = action.data;
+        if (draft.recentTexts.length >= 5) {
+          draft.recentTexts.splice(0, 1);
+        }
+        draft.recentTexts = draft.recentTexts.concat(action.data);
       });
     case ActionTypes.CLEAR_RECENTS:
       return produce(state, (draft) => {
         draft.recentTexts = [];
+      });
+    case ActionTypes.SET_SEARCHTEXT:
+      return produce(state, (draft) => {
+        draft.searchCurrentText = action.data;
       });
     default:
       return state;

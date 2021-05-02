@@ -7,44 +7,50 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 //screens
 import SearchIndex from '@pages/tabs/search';
 import ClipsIndex from '@pages/tabs/clips';
+import WebViewIndex from '@pages/webview';
 
-const Stack = createStackNavigator();
+const CoverModal = createStackNavigator();
 
 const Tab = createBottomTabNavigator();
+
+const TabNav = ({ route }) => (
+  <Tab.Navigator
+    screenOptions={({ route }) => ({
+      tabBarIcon: ({ focused, color, size }) => {
+        let iconName;
+
+        if (route.name === '검색') {
+          iconName = focused
+            ? require('/img/search-on.png')
+            : require('/img/search-off.png');
+        } else if (route.name === '클립한 뉴스') {
+          iconName = focused
+            ? require('/img/clip-on.png')
+            : require('/img/clip-off.png');
+        }
+
+        // You can return any component that you like here!
+        return <Image source={iconName} style={{ width: 25, height: 25 }} />;
+      },
+    })}
+    tabBarOptions={{
+      activeTintColor: 'blue',
+      inactiveTintColor: 'gray',
+      keyboardHidesTabBar: true,
+    }}
+  >
+    <Tab.Screen name="검색" component={SearchIndex} />
+    <Tab.Screen name="클립한 뉴스" component={ClipsIndex} />
+  </Tab.Navigator>
+);
 
 const AppContainer = () => {
   return (
     <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
-
-            if (route.name === '검색') {
-              iconName = focused
-                ? require('/img/search-on.png')
-                : require('/img/search-off.png');
-            } else if (route.name === '클립') {
-              iconName = focused
-                ? require('/img/clip-on.png')
-                : require('/img/clip-off.png');
-            }
-
-            // You can return any component that you like here!
-            return (
-              <Image source={iconName} style={{ width: 25, height: 25 }} />
-            );
-          },
-        })}
-        tabBarOptions={{
-          activeTintColor: 'blue',
-          inactiveTintColor: 'gray',
-          keyboardHidesTabBar: true,
-        }}
-      >
-        <Tab.Screen name="검색" component={SearchIndex} />
-        <Tab.Screen name="클립" component={ClipsIndex} />
-      </Tab.Navigator>
+      <CoverModal.Navigator mode="modal" screenOptions={{ headerShown: false }}>
+        <CoverModal.Screen name="Tabs" component={TabNav} />
+        <CoverModal.Screen name="Webview" component={WebViewIndex} />
+      </CoverModal.Navigator>
     </NavigationContainer>
   );
 };
