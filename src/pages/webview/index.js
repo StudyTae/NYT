@@ -39,7 +39,7 @@ const Webview = (props) => {
                 ? require('/img/clip-on.png')
                 : require('/img/clip-off.png')
             }
-            resizeMode={'contain'}
+            resizeMode={'stretch'}
             style={styles.headerIcon}
             fadeDuration={0}
           />
