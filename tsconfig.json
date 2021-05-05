@@ -1,10 +1,16 @@
 {
     "compilerOptions": {
-      "target": "ES6",
+      "allowJs": true,
       "allowSyntheticDefaultImports": true,
-      "baseUrl": ".",
+      "esModuleInterop": true,
+      "isolatedModules": true,
+      "jsx": "react",
+      "lib": ["es6"],
       "moduleResolution": "node",
-      "checkJs": false,
+      "noEmit": true,
+      "strict": true,
+      "target": "esnext",
+      "baseUrl": ".",
       "paths": {      
         "@common/*": ["src/common/*"],
         "@components/*": ["src/components/*"],
@@ -15,6 +21,11 @@
         "@css/*": ["src/css/*"],
         "/": ["."]
       }
-    }
-  }
-  
+    },
+    "exclude": [
+      "node_modules",
+      "babel.config.js",
+      "metro.config.js",
+      "jest.config.js"
+    ]
+}

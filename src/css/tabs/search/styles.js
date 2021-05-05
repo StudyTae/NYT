@@ -22,4 +22,8 @@ export default StyleSheet.create({
   boldText: {
     fontWeight: 'bold',
   },
+  recentButton: {
+    marginTop: 5,
+    marginBottom: 5,
+  },
 });

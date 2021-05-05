@@ -4,8 +4,9 @@ import { View, TouchableOpacity, Image } from 'react-native';
 import WebView from 'react-native-webview';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 import { handleClips } from '@common/helpers';
+import { News } from '@data/types/NewYorkTimes';
 
-const Webview = (props) => {
+const Webview: React.FC<any> = (props) => {
   const { route, navigation } = props;
   const dispatch = useDispatch();
   const { clipList } = useSelector((s) => s.clips, shallowEqual); // 클립한 뉴스 리스트 상태
@@ -35,7 +36,7 @@ const Webview = (props) => {
         >
           <Image
             source={
-              clipList.findIndex((clip) => clip._id === newsitem._id) >= 0
+              clipList.findIndex((clip : News) => clip._id === newsitem._id) >= 0
                 ? require('/img/clip-on.png')
                 : require('/img/clip-off.png')
             }

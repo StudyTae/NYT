@@ -4,6 +4,14 @@
 
 import produce from 'immer';
 import * as ActionTypes from './actionTypes';
+import { ClipsActions } from './actionTypes';
+import { News } from '../types/NewYorkTimes';
+
+interface initialStateProps {
+  clipList: News[];
+  recentTexts: string[];
+  searchCurrentText?: string;
+}
 
 const initialState = {
   clipList: [],
@@ -11,7 +19,10 @@ const initialState = {
   searchCurrentText: '',
 };
 
-export const clips = (state = initialState, action) => {
+export const clips = (
+  state: initialStateProps = initialState,
+  action: ClipsActions,
+) => {
   switch (action.type) {
     case ActionTypes.INIT_DATA:
       return action.data || state;

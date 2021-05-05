@@ -4,13 +4,18 @@ import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 import styles from '@css/tabs/clips/styles';
 import NewsComponentItem from '@components/NewsComponentItem';
 import EmptyComponent from '@components/EmptyComponent';
+import { News } from '@data/types/NewYorkTimes';
+
+interface renderProps {
+  item: News;
+}
 
 const ClipsIndex = () => {
   const dispatch = useDispatch();
   const { clipList } = useSelector((s) => s.clips, shallowEqual); // 클립한 뉴스 리스트 상태
 
   //뉴스 데이터 UI
-  const renderItem = ({ item }) => (
+  const renderItem: React.FC<renderProps> = ({ item }) => (
     <NewsComponentItem clipList={clipList} item={item} dispatch={dispatch} />
   );
 

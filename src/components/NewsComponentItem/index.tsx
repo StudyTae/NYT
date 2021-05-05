@@ -6,9 +6,17 @@ import { useNavigation } from '@react-navigation/native';
 import { shallowEqual, useSelector } from 'react-redux';
 import clipsTypes from '@data/clips/actionTypes';
 import styles from './styles';
+import { News } from '@data/types/newyorktimes';
+import { Dispatch } from 'redux';
+
+interface Props {
+  item: News;
+  clipList: News[];
+  dispatch: Dispatch<any>
+}
 
 //뉴스 리스트 컴포넌트 UI
-const NewsComponentItem = React.memo(({ dispatch, item, clipList }) => {
+const NewsComponentItem = React.memo<Props>(({ dispatch, item, clipList }) => {
   const navigation = useNavigation();
   const { searchCurrentText } = useSelector((s) => s.clips, shallowEqual);
   return (

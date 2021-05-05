@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, Text, Image } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer,RouteProp } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -13,7 +13,7 @@ const CoverModal = createStackNavigator();
 
 const Tab = createBottomTabNavigator();
 
-const TabNav = ({ route }) => (
+const TabNav = () => (
   <Tab.Navigator
     screenOptions={({ route }) => ({
       tabBarIcon: ({ focused, color, size }) => {

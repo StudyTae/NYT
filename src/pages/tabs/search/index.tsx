@@ -6,6 +6,7 @@ import {
   TextInput,
   Text,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import { apiNYT } from '@common/api';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
@@ -14,14 +15,15 @@ import EmptyComponent from '@components/EmptyComponent';
 import produce from 'immer';
 import clipsTypes from '@data/clips/actionTypes';
 import styles from '@css/tabs/search/styles';
+import { NewYorkTimes,News } from '@data/types/NewYorkTimes';
 
-const SearchIndex = (props) => {
+const SearchIndex: React.FC = () => {
   const dispatch = useDispatch();
   const { clipList, recentTexts } = useSelector((s) => s.clips, shallowEqual); // 클립한 뉴스 리스트 상태
-  const [news, setNews] = useState([]); // 뉴스 데이터 리스트
-  const [searchText, setSearchText] = useState(''); // 검색어
-  const [page, setPage] = useState(0); // 페이지 수
-  const onEndReachedCalledDuringMomentum = useRef(); // 뉴스 리스트 참조
+  const [news, setNews] = useState<NewYorkTimes>({docs: []}); // 뉴스 데이터 리스트
+  const [searchText, setSearchText] = useState<string>(''); // 검색어
+  const [page, setPage] = useState<number>(0); // 페이지 수
+  const onEndReachedCalledDuringMomentum = useRef<any>(null); // 뉴스 리스트 참조
 
   const initalize = useCallback(
     async (paramtext, currentPage) => {
@@ -47,11 +49,15 @@ const SearchIndex = (props) => {
   //초기 뉴스 데이터 불러오기
   useEffect(() => {
     onEndReachedCalledDuringMomentum.current = true;
-    initalize().then(setNews).catch(console.error);
+    initalize('','init').then(setNews).catch(console.error);
   }, []);
 
+  interface renderProps {
+    item: News;
+  }
+
   //뉴스 데이터 UI
-  const renderItem = ({ item }) => (
+  const renderItem : React.FC<renderProps> = ({ item }) => (
     <NewsComponentItem clipList={clipList} item={item} dispatch={dispatch} />
   );
 
@@ -65,7 +71,7 @@ const SearchIndex = (props) => {
         setNews(response);
       } catch (err) {
         console.error(err);
-        alert('뉴스리스트를 불러오기에 실패하였습니다.');
+        Alert.alert('뉴스리스트를 불러오기에 실패하였습니다.');
       }
     },
     [news, page],
@@ -104,13 +110,10 @@ const SearchIndex = (props) => {
               onChangeText={handleSearch}
             />
             <Text style={styles.boldText}>최근 검색어</Text>
-            {recentTexts.map((text, index) => (
+            {recentTexts.map((text: string, index :number) => (
               <TouchableOpacity
                 key={`${text}-${index}`}
-                style={{
-                  marginTop: 5,
-                  marginBottom: text.length === index + 1 && 5,
-                }}
+                style={styles.recentButton}
                 onPress={() => {
                   setSearchText(text);
                   initalize(text, 'init').then(setNews).catch(console.error);

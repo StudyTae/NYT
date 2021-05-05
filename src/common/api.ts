@@ -14,7 +14,7 @@ axiosRetry(apiNYT, {
     return retryCount * 500;
   },
   retryCondition: (error) => {
-    return error.response.status === 429;
+    return error?.response?.status === 429;
   },
 });
 
