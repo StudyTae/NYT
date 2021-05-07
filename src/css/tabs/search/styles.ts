@@ -1,6 +1,17 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet,ViewStyle, ImageStyle, TextStyle } from 'react-native';
 
-export default StyleSheet.create({
+
+interface Style {
+  container: ViewStyle;
+  headerArea: ViewStyle;
+  textInput: ViewStyle;
+  mainImg: ImageStyle;
+  boldText: TextStyle;
+  recentButton: ViewStyle;
+}
+
+
+export default StyleSheet.create<Style>({
   container: {
     flex: 1,
     backgroundColor: '#ffffff',

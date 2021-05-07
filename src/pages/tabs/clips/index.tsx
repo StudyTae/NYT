@@ -10,7 +10,7 @@ interface renderProps {
   item: News;
 }
 
-const ClipsIndex = () => {
+const ClipsIndex: React.FC = () => {
   const dispatch = useDispatch();
   const { clipList } = useSelector((s) => s.clips, shallowEqual); // 클립한 뉴스 리스트 상태
 

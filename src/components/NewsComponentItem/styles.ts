@@ -1,6 +1,14 @@
-import { StyleSheet } from 'react-native';
+import {  ImageStyle, StyleSheet, TextStyle, ViewStyle } from 'react-native';
 
-export default StyleSheet.create({
+interface Style {
+  newsConponentButton: ViewStyle;
+  newsClipButton: ViewStyle;
+  newsClipImg: ImageStyle;
+  newsHeadTitle: TextStyle;
+}
+
+
+export default StyleSheet.create<Style>({
   newsConponentButton: {
     flex: 1,
     margin: 5,

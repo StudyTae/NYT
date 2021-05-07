@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { View, Text, Image } from 'react-native';
-import { NavigationContainer,RouteProp } from '@react-navigation/native';
+import { Image } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -28,8 +28,6 @@ const TabNav = () => (
             ? require('/img/clip-on.png')
             : require('/img/clip-off.png');
         }
-
-        // You can return any component that you like here!
         return <Image source={iconName} style={{ width: 25, height: 25 }} />;
       },
     })}
